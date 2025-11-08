@@ -4,13 +4,28 @@
 
 # LIRA - Agent de Raonament Intel·ligent Lleuger
 
-LIRA és un framework lleuger i extensible per a crear i gestionar agents d'IA. Està dissenyat per a ser un sistema simple i autocontingut que es pot desplegar i gestionar fàcilment en una màquina local.
+LIRA és un framework lleuger i extensible per a crear i gestionar agents d'IA, dissenyat per a funcionar amb models de llenguatge locals a través d'Ollama.
+
+## Concepte i Arquitectura
+
+LIRA neix amb l'objectiu de crear un sistema d'agents intel·ligents que operi de manera local, aprofitant la potència dels models de llenguatge moderns sense dependre de serveis al núvol.
+
+L'arquitectura es basa en un agent principal (orquestrador) que actua com a cervell del sistema. Aquest agent, impulsat pel model `gemma2:9b` a través d'Ollama, s'encarrega de:
+1.  **Interactuar amb l'usuari:** Rep les peticions a través de diferents interfícies (OpenWebUI, CLI, API).
+2.  **Processar la petició:** Analitza la tasca sol·licitada.
+3.  **Delegar a agents especialitzats:** Si la tasca requereix una habilitat específica (p. ex., accés a fitxers, execució de codi), l'orquestrador delega la feina a un agent més capacitat.
+
+Aquest disseny modular permet una gran flexibilitat i la possibilitat d'ampliar les capacitats del sistema simplement afegint nous agents.
 
 ## Característiques
 
-*   **API Simple:** Una API bàsica per a interactuar amb el nucli de LIRA.
-*   **Servei Systemd:** S'executa com un servei de systemd per a una gestió fàcil.
-*   **Extensible:** Dissenyat per a ser fàcilment estès amb nous agents i capacitats.
+*   **Integració amb Ollama:** Dissenyat per a funcionar amb models de llenguatge locals a través d'Ollama, amb `gemma2:9b` com a model principal recomanat.
+*   **Múltiples Interfícies:**
+    *   **OpenWebUI:** Pensat per a ser integrat com a backend a OpenWebUI per a una interacció visual.
+    *   **CLI Opcional:** Una interfície de línia de comandes per a un ús més directe i automatitzat.
+    *   **API REST:** Una API bàsica per a interactuar amb el nucli de LIRA des d'altres plataformes.
+*   **Sistema d'Agents Extensible:** Arquitectura basada en agents especialitzats que poden ser afegits o modificats fàcilment.
+*   **Servei Systemd:** S'executa com un servei de systemd per a una gestió fàcil i persistent.
 
 ## Instal·lació
 
