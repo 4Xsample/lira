@@ -7,3 +7,9 @@ api:
 logging:
   level: "info"
   file: "/var/log/lira.log"
+
+# Model configuration
+model:
+  # The main model to be used by the orchestrator
+  # This model should be available in Ollama
+  main_model: "gemma2:9b"
