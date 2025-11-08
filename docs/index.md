@@ -1,11 +1,11 @@
-# LIRA Documentation
+# Documentació de LIRA
 
-This is the main documentation for the LIRA project.
+Aquesta és la documentació principal del projecte LIRA.
 
-## Architecture
+## Arquitectura
 
-(Coming soon)
+(Properament)
 
-## Agent Development
+## Desenvolupament d'Agents
 
-(Coming soon)
+(Properament)

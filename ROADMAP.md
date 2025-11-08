@@ -1,24 +1,24 @@
-# LIRA Roadmap
+# Full de Ruta de LIRA
 
-This document outlines the planned features and improvements for LIRA.
+Aquest document descriu les característiques i millores planificades per a LIRA.
 
-## Short-Term Goals (v0.2)
+## Objectius a Curt Termini (v0.2)
 
-*   [ ] **Agent Manager:** Implement a more sophisticated agent manager to dynamically load and unload agents.
-*   [ ] **API Authentication:** Add a simple API key authentication mechanism.
-*   [ ] **Configuration Reloading:** Allow the configuration to be reloaded without restarting the service.
-*   [ ] **Improved Logging:** Implement more structured logging and allow for log level configuration.
+*   [ ] **Gestor d'Agents:** Implementar un gestor d'agents més sofisticat per carregar i descarregar agents dinàmicament.
+*   [ ] **Autenticació de l'API:** Afegir un mecanisme d'autenticació simple amb clau d'API.
+*   [ ] **Recàrrega de la Configuració:** Permetre que la configuració es pugui recarregar sense reiniciar el servei.
+*   [ ] **Registre Millorat:** Implementar un registre més estructurat i permetre la configuració del nivell de registre.
 
-## Medium-Term Goals (v0.5)
+## Objectius a Mitjà Termini (v0.5)
 
-*   [ ] **Multi-Agent Communication:** Implement a message bus or similar mechanism for agents to communicate with each other.
-*   [ ] **Web UI:** Create a simple web-based UI for managing agents and viewing logs.
-*   [ ] **More Agent Types:** Develop a wider range of pre-built agents for common tasks (e.g., file system monitoring, web scraping).
-*   [ ] **Plugin System:** Develop a plugin system to allow for easy extension of LIRA's core functionality.
+*   [ ] **Comunicació Multi-Agent:** Implementar un bus de missatges o un mecanisme similar perquè els agents es comuniquin entre ells.
+*   [ ] **Interfície Web (UI):** Crear una interfície web senzilla per gestionar agents i visualitzar registres.
+*   [ ] **Més Tipus d'Agents:** Desenvolupar una gamma més àmplia d'agents predefinits per a tasques comunes (p. ex., monitorització del sistema de fitxers, web scraping).
+*   [ ] **Sistema de Plugins:** Desenvolupar un sistema de plugins per permetre una fàcil extensió de la funcionalitat principal de LIRA.
 
-## Long-Term Goals (v1.0)
+## Objectius a Llarg Termini (v1.0)
 
-*   [ ] **Full-Fledged Orchestrator:** Develop LIRA into a full-fledged AI orchestrator with a rich set of features for managing complex workflows.
-*   [ ] **Distributed Architecture:** Allow LIRA to run in a distributed environment with multiple nodes.
-*   [ ] **Official Docker Image:** Provide an official Docker image for easy deployment.
-*   [ ] **Community Marketplace:** Create a marketplace for sharing and discovering community-created agents and plugins.
+*   [ ] **Orquestrador Complet:** Desenvolupar LIRA com un orquestrador d'IA complet amb un ric conjunt de característiques per gestionar fluxos de treball complexos.
+*   [ ] **Arquitectura Distribuïda:** Permetre que LIRA s'executi en un entorn distribuït amb múltiples nodes.
+*   [ ] **Imatge Oficial de Docker:** Proporcionar una imatge oficial de Docker per a un desplegament fàcil.
+*   [ ] **Mercat Comunitari:** Crear un mercat per compartir i descobrir agents i plugins creats per la comunitat.
