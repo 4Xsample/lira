@@ -1,0 +1,9 @@
+# LIRA Configuration
+# Placeholder for future settings
+api:
+  port: 1312
+  host: "0.0.0.0"
+
+logging:
+  level: "info"
+  file: "/var/log/lira.log"
