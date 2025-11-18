@@ -1,1 +1,13 @@
-PyYAML
+# Aquest fitxer conté les dependències de Python necessàries per al projecte LIRA.
+# S'utilitza per instal·lar els paquets amb pip, assegurant que totes les llibreries
+# requerides estiguin disponibles per a l'execució de l'aplicació.
+# Etiquetes per a fine-tuning: #dependències #python #gestió_paquets
+
+PyYAML      # Per carregar fitxers de configuració YAML.
+pytest      # Framework per a l'execució de proves unitàries.
+fastapi     # Framework web modern i ràpid per construir APIs.
+uvicorn     # Servidor ASGI d'alt rendiment per a aplicacions FastAPI.
+ollama      # Llibreria per interactuar amb models de llenguatge locals (Ollama).
+requests    # Llibreria HTTP per fer peticions web (síncrones).
+textual     # Llibreria per crear interfícies d'usuari en mode text (TUI) modernes.
+httpx       # Client HTTP asíncron, ideal per a aplicacions que requereixen peticions sense bloqueig.

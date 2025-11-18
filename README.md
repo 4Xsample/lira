@@ -4,6 +4,8 @@
 
 # LIRA - Agent de Raonament Intel·ligent Lleuger
 
+# Etiquetes per a fine-tuning: #project_overview #documentation #readme #lira_agent
+
 LIRA és un framework lleuger i extensible per a crear i gestionar agents d'IA, dissenyat per a funcionar amb models de llenguatge locals a través d'Ollama.
 
 ## Concepte i Arquitectura
@@ -23,7 +25,7 @@ Aquest disseny modular permet una gran flexibilitat i la possibilitat d'ampliar 
 *   **Múltiples Interfícies:**
     *   **OpenWebUI:** Pensat per a ser integrat com a backend a OpenWebUI per a una interacció visual.
     *   **CLI Opcional:** Una interfície de línia de comandes per a un ús més directe i automatitzat.
-    *   **API REST:** Una API bàsica per a interactuar amb el nucli de LIRA des d'altres plataformes.
+    *   **API REST (OpenAI-compatible):** Una API funcional (a partir de la v0.1.2) que permet interactuar amb el nucli de LIRA des d'altres plataformes. Els models exposats a través d'aquesta API tindran el prefix "Lira-" (p. ex., "Lira-gemma2:9b") per a una identificació clara.
 *   **Sistema d'Agents Extensible:** Arquitectura basada en agents especialitzats que poden ser afegits o modificats fàcilment.
 *   **Servei Systemd:** S'executa com un servei de systemd per a una gestió fàcil i persistent.
 
@@ -50,6 +52,31 @@ Un cop instal·lat, l'API de LIRA s'executarà a `http://localhost:1312`. Pots c
 ```bash
 sudo systemctl status lira.service
 ```
+
+Per veure els models exposats per LIRA (amb el prefix "Lira-"), pots fer:
+
+```bash
+curl http://localhost:1312/v1/models
+```
+
+## Novetats en la versió 0.1.2
+
+La versió 0.1.2 de LIRA introdueix millores significatives en la funcionalitat i la seguretat:
+
+### API REST (OpenAI-compatible)
+S'ha implementat una API REST completa que permet la integració de LIRA amb plataformes com OpenWebUI. Aquesta API és compatible amb l'especificació d'OpenAI, facilitant la seva adopció. Els models exposats a través d'aquesta API ara inclouen el prefix "Lira-" (p. ex., "Lira-gemma2:9b") per a una identificació clara i evitar conflictes amb altres models.
+
+### Execució segura de comandes
+S'ha incorporat un robust sistema per a l'execució segura de comandes del sistema, controlat per una whitelist i un mecanisme de permisos interactiu:
+- Les comandes permeses es defineixen a `config/lira.yaml` sota `commands.whitelist` mitjançant expressions regulars.
+- Quan un agent sol·licita l'execució d'una comanda, el sistema verifica la whitelist i, si cal, demana confirmació a l'usuari amb les opcions:
+  - `1` = Sí, només una vegada
+  - `2` = Sí, permanent aquesta sessió
+  - `0` = Cancel·la i atura la cadena d'execució
+- Si la petició prové d'una interfície remota (com OpenWebUI), la decisió es pot enviar com un objecte JSON: `{"decision":"once"|"session"|"cancel"}`.
+- Per defecte, en mode no interactiu, les comandes es rebutgen per seguretat.
+- S'utilitzen pràctiques segures com la normalització de comandes, l'aplicació de timeouts i la no utilització de `shell=True` per defecte.
+- **Advertència:** Ajusteu la whitelist amb extrema cura. Eviteu afegir comandes potencialment perilloses si no esteu completament segur de les seves implicacions.
 
 ## Contribucions
 

@@ -1,5 +1,7 @@
 # Full de Ruta de LIRA
 
+# Etiquetes per a fine-tuning: #roadmap #documentation #project_planning
+
 Aquest document descriu les característiques i millores planificades per a LIRA.
 
 ## Objectius a Curt Termini (v0.2)

@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 
+# Etiquetes per a fine-tuning: #installation #script #deployment #systemd
+
 # --- Configuració de Logs ---
 LOGFILE="/tmp/lira_install_$(date +%s).log"
 exec > >(tee -a "$LOGFILE") 2>&1

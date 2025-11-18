@@ -1,0 +1,40 @@
+{
+  "project": "lira",
+  "version_target": "0.1.2",
+  "date": "2025-11-12T16:51:00+01:00",
+  "summary": "Afegida execució segura de comandes amb whitelist i sistema de permisos interactiu (1=once,2=session,0=cancel). També s'ha afegit una API funcional compatible amb OpenAI que exposa models d'Ollama amb el prefix 'Lira-'.",
+  "files_added": [
+    "core/perm_session.py",
+    "core/exec.py",
+    "tests/test_exec.py",
+    "tests/test_perm_session.py",
+    "changes/lira-0.1.2-changes.json"
+  ],
+  "files_modified": [
+    "core/orchestrator.py",
+    "config/lira.yaml",
+    "README.md",
+    "CHANGELOG.md",
+    "core/lira_api.py"
+  ],
+  "api_features": {
+    "description": "API funcional compatible amb OpenAI per a la interacció amb models d'Ollama.",
+    "model_prefixing": "Els models exposats per LIRA a través de l'API ara inclouen el prefix 'Lira-' (e.g., 'Lira-gemma2:9b') per a una identificació clara en interfícies com Open WebUI.",
+    "endpoint_models": "/v1/models",
+    "endpoint_chat_completions": "/v1/chat/completions"
+  },
+  "whitelist_example": [
+    "^ls(\s|$)",
+    "^cat\s+/etc/.*",
+    "^apt\s+update$",
+    "^apt\s+install\s+[-\\w]+$"
+  ],
+  "security_notes": "No usar shell=True; normalitzar comandes; timeout i limit sortida; default deny en mode no interactiu; registrar auditories.",
+  "how_to_resume": "Instal·lar fitxers, ajustar whitelist a config/lira.yaml, executar tests: pytest tests/, provar amb consola i amb UI passant payload {\"decision\":\"once|session|cancel\"}.",
+  "last_actions_recommended": [
+    "Afegir logger d'auditories (file o DB)",
+    "Implementar endpoint REST per rebre decisions des d'OpenWebUI",
+    "Afegir badge CI que executi tests"
+  ],
+  "notes_from_repo_review": "Projecte orientat a agents locals; recomanat usar models locals via Ollama; instal·lador a scripts/install.sh; objectiu d'orquestrador modular."
+}

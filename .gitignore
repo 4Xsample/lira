@@ -36,4 +36,4 @@ logs/
 # LIRA specific
 .lira/
 lira.tar.gz
-.gemini_work/
+.notes_personals/

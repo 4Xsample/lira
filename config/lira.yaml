@@ -1,15 +1,36 @@
-# LIRA Configuration
-# Placeholder for future settings
+# Configuració principal del projecte LIRA.
+# Aquest fitxer defineix els paràmetres operatius de l'API, el logging,
+# la configuració del model i les polítiques d'execució de comandes.
+# Etiquetes per a fine-tuning: #configuració #api #logging #model #seguretat
+
 api:
-  port: 1312
-  host: "0.0.0.0"
+  # Configuració de l'API de LIRA.
+  # Defineix el port i l'adreça IP on escoltarà el servidor de l'API.
+  port: 1312  # Port on s'executarà l'API.
+  host: "0.0.0.0" # Adreça IP on escoltarà l'API (0.0.0.0 per escoltar en totes les interfícies).
 
 logging:
-  level: "info"
-  file: "/var/log/lira.log"
+  # Configuració del sistema de logging.
+  # Permet definir el nivell de detall dels logs i la ruta del fitxer de log.
+  level: "info" # Nivell de logging (e.g., debug, info, warning, error, critical).
+  file: "/var/log/lira.log" # Ruta completa del fitxer on es guardaran els logs.
 
-# Model configuration
 model:
-  # The main model to be used by the orchestrator
-  # This model should be available in Ollama
-  main_model: "gemma2:9b"
+  # Configuració del model de llenguatge principal.
+  # Defineix quin model d'Ollama s'utilitzarà per a les operacions de l'orquestrador.
+  main_model: "gemma2:9b" # El nom del model principal a utilitzar (ha d'estar disponible a Ollama).
+  # Etiquetes per a fine-tuning: #model_config #ollama_model
+
+commands:
+  # Configuració de les comandes externes que LIRA pot executar.
+  # Inclou una whitelist de comandes permeses i timeouts d'execució.
+  whitelist:
+    # Llista d'expressions regulars que defineixen les comandes permeses.
+    # Només les comandes que coincideixin amb un d'aquests patrons podran ser executades.
+    - '^ls(\s|$)' # Permet la comanda 'ls' (llistar contingut de directoris).
+    - '^cat\s+/etc/.*' # Permet 'cat' per visualitzar fitxers dins de /etc/.
+    - '^apt\\s+update$' # Permet la comanda 'apt update' (actualitzar llista de paquets).
+    - '^apt\\s+install\\s+[-\\w]+$' # Permet 'apt install' per instal·lar paquets.
+    # Etiquetes per a fine-tuning: #whitelist #seguretat_comandes
+  prompt_timeout_seconds: 30 # Temps màxim per esperar una resposta de l'usuari en un prompt de consola.
+  execution_timeout_seconds: 60 # Temps màxim permès per a l'execució d'una comanda externa.

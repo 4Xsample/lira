@@ -1,9 +1,26 @@
 # Changelog
 
+# Etiquetes per a fine-tuning: #changelog #documentation #project_history
+
 Tots els canvis notables en aquest projecte seran documentats en aquest fitxer.
 
 El format es basa en [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 i aquest projecte s'adhereix a [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [0.1.2] - 2025-11-12
+
+Afegit:
+- Execució segura de comandes del sistema amb whitelist i flux de permisos interactiu (1=una vegada, 2=sessió, 0=cancel·lar).
+- Nous mòduls: `core/perm_session.py`, `core/exec.py`.
+- Addicions de configuració d'exemple a `config/lira.yaml`.
+- Esquelet de tests: `tests/test_exec.py`, `tests/test_perm_session.py`.
+- Fitxer de canvis: `changes/lira-0.1.2-changes.json`.
+- API funcional per a la interacció amb models d'Ollama, compatible amb l'API d'OpenAI.
+- Models exposats per LIRA ara inclouen el prefix "Lira-" per a una identificació clara en interfícies com Open WebUI.
+
+Notes:
+- Denegació per defecte en mode no interactiu.
+- Consulteu el README per a la guia d'ús i seguretat.
 
 ## [0.1.1] - 2025-11-08
 
