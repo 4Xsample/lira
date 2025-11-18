@@ -128,10 +128,24 @@ class LIRAAPIHandler(http.server.BaseHTTPRequestHandler):
             request_payload = json.loads(post_data)
 
             messages = request_payload.get('messages')
+#            model = request_payload.get('model', MODEL_NAME)
+#
+#            ollama_request_payload = {
+#                "model": model,
+#                "messages": messages,
+#                "stream": False
+#            }
+
             model = request_payload.get('model', MODEL_NAME)
 
+            # Si el model té el prefix "Lira-", el treiem per a Ollama
+            if model.startswith("Lira-"):
+                ollama_model_name = model[5:]
+            else:
+                ollama_model_name = model
+
             ollama_request_payload = {
-                "model": model,
+                "model": ollama_model_name, # <-- Ara enviem el nom correcte
                 "messages": messages,
                 "stream": False
             }

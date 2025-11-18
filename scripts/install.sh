@@ -1,8 +1,6 @@
 #!/bin/bash
 set -e
 
-# Etiquetes per a fine-tuning: #installation #script #deployment #systemd
-
 # --- Configuració de Logs ---
 LOGFILE="/tmp/lira_install_$(date +%s).log"
 exec > >(tee -a "$LOGFILE") 2>&1
@@ -51,11 +49,22 @@ echo "Creant directori d'instal·lació..."
 mkdir -p "$INSTALL_DIR"
 
 echo "Copiant fitxers de LIRA..."
-# Copia tot el contingut de la carpeta font (.lira) a la destinació
+# Copia tot el contingut de la carpeta font a la destinació
 cp -r "$LIRA_SOURCE_DIR"/* "$INSTALL_DIR"/
 echo "Fitxers copiats correctament."
 
-# --- Configuració del servei systemd ---
+# --- Configuració de l'entorn virtual i dependències (ABANS del servei) ---
+echo "✅ Creant l'entorn virtual i instal·lant les dependències de LIRA..."
+# Naveguem al directori d'instal·lació per crear el venv allí
+cd "$INSTALL_DIR" || exit 1
+python3 -m venv .venv
+source .venv/bin/activate
+pip install --upgrade pip
+pip install -r requirements.txt
+deactivate
+echo "✅ Entorn virtual i dependències instal·lades correctament."
+
+# --- Configuració del servei systemd (DESPRÉS del venv) ---
 echo "Configurant el servei systemd..."
 SERVICE_PATH="/etc/systemd/system/lira.service"
 
@@ -66,7 +75,7 @@ Description=LIRA Orchestrator Service
 After=network.target
 
 [Service]
-ExecStart=/usr/bin/python3 $INSTALL_DIR/core/lira_api.py
+ExecStart=$INSTALL_DIR/.venv/bin/python $INSTALL_DIR/core/lira_api.py
 WorkingDirectory=$INSTALL_DIR
 Restart=always
 User=$USER
@@ -83,5 +92,12 @@ sudo systemctl enable lira.service
 sudo systemctl start lira.service
 
 echo "Servei LIRA iniciat."
+
+# --- Crear enllaç a la TUI ---
+echo "✅ Creant un enllaç a l'executable 'lira-tui'..."
+# L'enllaç es crearà a /usr/local/bin, que normalment ja és al PATH de l'usuari
+sudo ln -sf "$INSTALL_DIR/scripts/lira-tui.sh" /usr/local/bin/lira-tui
+echo "✅ Pots executar la TUI des de qualsevol lloc amb la comanda: lira-tui"
+
 echo "✅ Instal·lació completada! LIRA ja està activa."
 echo "Pots comprovar l'estat amb: sudo systemctl status lira.service"

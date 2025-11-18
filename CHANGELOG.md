@@ -7,6 +7,24 @@ Tots els canvis notables en aquest projecte seran documentats en aquest fitxer.
 El format es basa en [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 i aquest projecte s'adhereix a [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.3] - 2025-11-18
+
+### Afegit
+- Interfície d'Usuari de Text (TUI) per interactuar amb l'agent LIRA directament des de la consola.
+- Script `lira-tui` per a l'execució de la TUI des de qualsevol ubicació del sistema.
+- Dependències `textual` i `httpx` a `requirements.txt` per al funcionament de la TUI i les peticions asíncrones.
+
+### Canviat
+- Procés d'instal·lació (`install.sh`) completament revisat per crear i gestionar un entorn virtual (`.venv`) i assegurar que totes les dependències estiguin disponibles.
+- Configuració del servei `lira.service` corregida per utilitzar l'executable de Python de l'entorn virtual, garantint l'accés a les llibreries necessàries.
+
+### Corregit
+- Error crític a l'API on el prefix `Lira-` dels models no s'eliminava abans d'enviar la petició a Ollama, provocant un error 404.
+
+### Notes
+- La TUI es comunica amb l'API de LIRA, que ha d'estar en marxa com a servei (`sudo systemctl start lira.service`).
+- És necessari tenir el dimoni d'Ollama (`ollama serve`) en execució perquè la TUI funcioni correctament.
+
 ## [0.1.2] - 2025-11-12
 
 Afegit:
